@@ -133,8 +133,17 @@ public class CustomerTest {
 	}
 
 	private void createRentalFor(int daysRented, int priceCode) {
-		Movie movie = new Movie(MOVIE_TITLE, priceCode);
+		Movie movie = createMovie(priceCode);
 		Rental rental = new Rental(movie, daysRented);
 		customer.addRental(rental);
+	}
+
+	private Movie createMovie(int priceCode) {
+		switch(priceCode) {
+		case Movie.REGULAR:
+			return new RegularMovie(MOVIE_TITLE);
+		default : 
+			return new Movie(MOVIE_TITLE, priceCode);	
+		}
 	} 
 }

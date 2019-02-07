@@ -15,16 +15,11 @@ public class CustomerTest {
 	
 	@Test
 	public void returnNewCustomer()	{
-	    
 	    assertThat(customer, is(notNullValue()));
 	}
 	
 	@Test 
 	public void statmentForNoRental() {
-
-	    // arrange
-
-	    // act
 	    // assert
 	    assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n"
 	        + "Amount owed is 0.0\n"
@@ -33,12 +28,8 @@ public class CustomerTest {
 	
 	@Test 
 	public void statementForRegularMovieRentalForLessThan3Days() {
-
 	    // arrange
-	    Movie movie = new Movie(MOVIE_TITLE, Movie.REGULAR);
-	    int daysRented = 2;
-	    Rental rental = new Rental(movie, daysRented);
-	    customer.addRental(rental);
+		createRentalFor(2, Movie.REGULAR);
 
 	    // act
 	    // assert
@@ -46,16 +37,13 @@ public class CustomerTest {
 	        + "\t2.0(TITLE_NOT_IMPORTANT)\n" 
 	        + "Amount owed is 2.0\n"
 	        + "You earned 1 frequent renter pointers"));
-	} 
+	}
+
 	
 	@Test 
 	public void statementForRegularMovieRentalForMoreThan2Days() {
-
 	    // arrange
-	    Movie movie = new Movie(MOVIE_TITLE, Movie.REGULAR);
-	    int daysRented = 3;
-	    Rental rental = new Rental(movie, daysRented);
-	    customer.addRental(rental);
+		createRentalFor(3, Movie.REGULAR);
 
 	    // act
 	    // assert
@@ -67,12 +55,8 @@ public class CustomerTest {
 	
 	@Test 
 	public void statementForNewReleaseMovie() {
-
 	    // arrange
-	    Movie movie = new Movie(MOVIE_TITLE, Movie.NEW_RELEASE);
-	    int daysRented = 1;
-	    Rental rental = new Rental(movie, daysRented);
-	    customer.addRental(rental);
+		createRentalFor(1, Movie.NEW_RELEASE);
 
 	    // act
 	    // assert
@@ -84,12 +68,8 @@ public class CustomerTest {
 	
 	@Test 
 	public void statementForChildrensMovieRentalMoreThan3Days() {
-
 	    // arrange
-	    Movie movie = new Movie(MOVIE_TITLE, Movie.CHILDRENS);
-	    int daysRented = 4;
-	    Rental rental = new Rental(movie, daysRented);
-	    customer.addRental(rental);
+		createRentalFor(4, Movie.CHILDRENS);
 
 	    // act
 	    // assert
@@ -101,12 +81,8 @@ public class CustomerTest {
 	
 	@Test 
 	public void statementForChildrensMovieRentalLessThan4Days() {
-
 	    // arrange
-	    Movie movie = new Movie(MOVIE_TITLE, Movie.CHILDRENS);
-	    int daysRented = 3;
-	    Rental rental = new Rental(movie, daysRented);
-	    customer.addRental(rental);
+	    createRentalFor(3, Movie.CHILDRENS);
 
 	    // act
 	    // assert
@@ -118,12 +94,8 @@ public class CustomerTest {
 	
 	@Test 
 	public void statementForNewReleaseMovieRentalMoreThan1Day() {
-
 	    // arrange
-	    Movie movie = new Movie(MOVIE_TITLE, Movie.NEW_RELEASE);
-	    int daysRented = 2;
-	    Rental rental = new Rental(movie, daysRented);
-	    customer.addRental(rental);
+		createRentalFor(2, Movie.NEW_RELEASE);
 
 	    // act
 	    // assert
@@ -135,14 +107,10 @@ public class CustomerTest {
 	
 	@Test 
 	public void statementForFewMovieRental() {
-
-	    Movie regularMovie = new Movie(MOVIE_TITLE, Movie.REGULAR);
-	    Movie newReleaseMovie = new Movie(MOVIE_TITLE, Movie.NEW_RELEASE);
-	    Movie childrensMovie = new Movie(MOVIE_TITLE, Movie.CHILDRENS);
-	    customer.addRental(new Rental(regularMovie, 1));
-	    customer.addRental(new Rental(newReleaseMovie, 4));
-	    customer.addRental(new Rental(childrensMovie, 4));
-
+		createRentalFor(1, Movie.REGULAR);
+		createRentalFor(4, Movie.NEW_RELEASE);
+		createRentalFor(4, Movie.CHILDRENS);
+	
 	    assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n" 
 	        + "\t2.0(TITLE_NOT_IMPORTANT)\n"
 	        + "\t12.0(TITLE_NOT_IMPORTANT)\n"
@@ -154,10 +122,7 @@ public class CustomerTest {
 	@Test
 	public void statementForNoPriceCodeMovieRental()	{
 	    // arrange
-	    Movie movie = new Movie(MOVIE_TITLE, -1);
-	    int daysRented = 1;
-	    Rental rental = new Rental(movie, daysRented);
-	    customer.addRental(rental);
+		createRentalFor(1, -1);
 
 	    // act
 	    // assert
@@ -167,4 +132,9 @@ public class CustomerTest {
 	        + "You earned 1 frequent renter pointers"));
 	}
 
+	private void createRentalFor(int daysRented, int priceCode) {
+		Movie movie = new Movie(MOVIE_TITLE, priceCode);
+		Rental rental = new Rental(movie, daysRented);
+		customer.addRental(rental);
+	} 
 }

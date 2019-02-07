@@ -150,6 +150,28 @@ public class CustomerTest {
 	        + "Amount owed is 6.0\n"
 	        + "You earned 2 frequent renter pointers"));
 	}
+	
+	@Test 
+	public void statementForFewMovieRental() {
+
+	    Customer customer = new Customer("NAME_NOT_IMPORTANT");
+	    Movie regularMovie = new Movie("TITLE_NOT_IMPORTANT", Movie.REGULAR);
+	    Movie newReleaseMovie = new Movie("TITLE_NOT_IMPORTANT", Movie.NEW_RELEASE);
+	    Movie childrensMovie = new Movie("TITLE_NOT_IMPORTANT", Movie.CHILDRENS);
+	    customer.addRental(new Rental(regularMovie, 1));
+	    customer.addRental(new Rental(newReleaseMovie, 4));
+	    customer.addRental(new Rental(childrensMovie, 4));
+
+	    String statement = customer.statement();
+
+	    assertThat(statement, is("Rental Record for NAME_NOT_IMPORTANT\n" 
+	        + "\t2.0(TITLE_NOT_IMPORTANT)\n"
+	        + "\t12.0(TITLE_NOT_IMPORTANT)\n"
+	        + "\t3.0(TITLE_NOT_IMPORTANT)\n"
+	        + "Amount owed is 17.0\n"
+	        + "You earned 4 frequent renter pointers"));
+	}
+
 
 
 

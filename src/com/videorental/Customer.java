@@ -23,13 +23,20 @@ class Customer {
 	};
 
 	public String statement() {
-
-		String result = "Rental Record for " + getName() + "\n";
+		String result = getStatementHeader();
 		result += getRentalLineReport();
-		result += "Amount owed is " + getTotalCharge() + "\n";
-		result += "You earned " + getFrequentRenterPoints() + " frequent renter pointers";
-
+		result += getStatementFooter();
 		return result;
+	}
+
+	private String getStatementFooter() {
+		String result = "Amount owed is " + getTotalCharge() + "\n";
+		result += "You earned " + getFrequentRenterPoints() + " frequent renter pointers";
+		return result;
+	}
+
+	private String getStatementHeader() {
+		return "Rental Record for " + getName() + "\n";
 	}
 
 	private String getRentalLineReport() {

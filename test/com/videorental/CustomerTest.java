@@ -171,6 +171,25 @@ public class CustomerTest {
 	        + "Amount owed is 17.0\n"
 	        + "You earned 4 frequent renter pointers"));
 	}
+	
+	@Test
+	public void statementForNoPriceCodeMovieRental()	{
+	    // arrange
+	    Customer customer = new Customer("NAME_NOT_IMPORTANT");
+	    Movie movie = new Movie("TITLE_NOT_IMPORTANT", -1);
+	    int daysRented = 1;
+	    Rental rental = new Rental(movie, daysRented);
+	    customer.addRental(rental);
+
+	    // act
+	    String statement = customer.statement();
+
+	    // assert
+	    assertThat(statement, is("Rental Record for NAME_NOT_IMPORTANT\n" 
+		+ "\t0.0(TITLE_NOT_IMPORTANT)\n" 
+	        + "Amount owed is 0.0\n"
+	        + "You earned 1 frequent renter pointers"));
+	}
 
 
 

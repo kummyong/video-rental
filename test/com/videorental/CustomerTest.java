@@ -144,6 +144,8 @@ public class CustomerTest {
 			return new RegularMovie(MOVIE_TITLE);
 		case Movie.NEW_RELEASE:
 			return new NewReleaseMovie(MOVIE_TITLE);
+		case Movie.CHILDRENS:
+			return new ChildrenMovie(MOVIE_TITLE);
 		default : 
 			return new Movie(MOVIE_TITLE, priceCode);	
 		}

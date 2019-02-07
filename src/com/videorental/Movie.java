@@ -26,16 +26,7 @@ public class Movie {
 	}
 
 	double getChargeFor(int daysRented) {
-		double thisAmount = 0;
-		switch (getPriceCode()) {
-	
-		case Movie.CHILDRENS:
-			thisAmount += 1.5;
-			if (daysRented > 3)
-				thisAmount += (daysRented - 3) * 1.5;
-			break;
-		}
-		return thisAmount;
+		return (double) 0;
 	}
 
 	int getFrequentRenterPointsFor(int daysRented) {

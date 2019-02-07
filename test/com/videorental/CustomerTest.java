@@ -122,7 +122,7 @@ public class CustomerTest {
 	@Test
 	public void statementForNoPriceCodeMovieRental()	{
 	    // arrange
-		createRentalFor(1, -1);
+		createRentalFor(1, -1); 
 
 	    // act
 	    // assert

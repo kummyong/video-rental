@@ -23,21 +23,29 @@ class Customer {
 	};
 
 	public String statement() {
-		Iterator<Rental> iterator = rentals.iterator();
-		String result = "Rental Record for " + getName() + "\n";
+		String result = getStatementHeader();
+		result += getRentalLineReport();
+		result += getStatementFooter();
 
-		while ( iterator.hasNext() ) {
-			Rental each = (Rental) iterator.next();
-			// determine amounts for each line
-  
-			// show figures
-			result += "\t" +  each.getCharge() + "(" + each.getMovie().getTitle() + ")" + "\n";
+		return result;
+	}
 
-		}
-		
-		result += "Amount owed is " + getTotalCharge() + "\n";
+	private String getStatementFooter() {
+		String result = "Amount owed is " + getTotalCharge() + "\n";
 		result += "You earned " + getFrequentRenterPoints() + " frequent renter pointers";
+		return result;
+	}
 
+	private String getStatementHeader() {
+		String result = "Rental Record for " + getName() + "\n";
+		return result;
+	}
+
+	private String getRentalLineReport() {
+		String result = "";
+		for (Rental rental : rentals) {
+			result  += "\t" +  rental.getCharge() + "(" + rental.getMovie().getTitle() + ")" + "\n";
+		}
 		return result;
 	}
 

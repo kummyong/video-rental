@@ -1,7 +1,7 @@
 package com.videorental;
 
 class Rental {
-		private Movie movie;
+	private Movie movie;
 	private int daysRented;
 
 	public Rental(Movie movie, int daysRented) {
@@ -37,5 +37,13 @@ class Rental {
 			break;
 		}
 		return thisAmount;
+	}
+
+	int frequentRenterPointsFor() {
+		if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) && getDaysRented() > 1) {
+			return 2;
+		}else {
+			return 1;
+		}
 	}
 }

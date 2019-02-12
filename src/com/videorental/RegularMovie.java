@@ -13,5 +13,9 @@ public class RegularMovie extends Movie {
 			thisAmount += (daysRented - 2) * 1.5;
 		return thisAmount;
 	}
+	
+	int getFrequentRenterPoints(int daysRented) {
+		return 1;
+	}
 
 }

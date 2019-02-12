@@ -68,8 +68,12 @@ public class CustomerTest {
 		switch (priceCode) {
 		case Movie.REGULAR:
 			return new RegularMovie(TITLE);
+		case Movie.NEW_RELEASE:
+			return new NewReleaseMovie(TITLE);
+		case Movie.CHILDRENS:
+			return new ChildrenMovie(TITLE);
 		default:
-			return new Movie(TITLE, priceCode);
+			throw new IllegalArgumentException("Price code is not found");
 		}
 	}
 	
@@ -123,9 +127,9 @@ public class CustomerTest {
 		
 		// arrange
 		
-		Movie regularMovie = new Movie(TITLE, Movie.REGULAR);
-		Movie newReleaseMovie = new Movie(TITLE, Movie.NEW_RELEASE);
-		Movie childrenMovie = new Movie(TITLE, Movie.CHILDRENS);
+		Movie regularMovie = new RegularMovie(TITLE);
+		Movie newReleaseMovie = new NewReleaseMovie(TITLE);
+		Movie childrenMovie = new ChildrenMovie(TITLE);
 		
 		customer.addRental(new Rental(regularMovie, 1));
 		customer.addRental(new Rental(newReleaseMovie, 4));
@@ -141,5 +145,4 @@ public class CustomerTest {
 				+ "You earned 4 frequent renter pointers"));
 	}
 
-	
 }
